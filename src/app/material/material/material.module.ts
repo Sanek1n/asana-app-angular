@@ -9,6 +9,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDivider } from '@angular/material/divider';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const materialComponents: Array<object> = [
   MatIconModule,
@@ -21,6 +23,8 @@ const materialComponents: Array<object> = [
   MatTabsModule,
   MatTableModule,
   MatCheckboxModule,
+  MatDivider,
+  MatTooltipModule,
 ];
 
 @NgModule({

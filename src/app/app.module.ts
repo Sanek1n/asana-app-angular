@@ -11,6 +11,7 @@ import { RepositoryService } from './services/repository.service';
 import { MaterialModule } from './material/material/material.module';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { HeaderComponent } from './components/header/header.component';
+import { MiniTaskComponent } from './components/mini-task/mini-task.component';
 
 registerLocaleData(LocaleRu);
 
@@ -19,6 +20,7 @@ registerLocaleData(LocaleRu);
     AppComponent,
     MainPageComponent,
     HeaderComponent,
+    MiniTaskComponent,
   ],
   imports: [
     BrowserModule,

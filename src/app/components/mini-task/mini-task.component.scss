@@ -1,0 +1,37 @@
+.mini-task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: .3s;
+  cursor: pointer;
+
+  &__complete {
+    padding-left: 20px;
+    flex-shrink: 0;
+  }
+
+  &__name {
+    width: 100%;
+    text-align: left;
+    flex-shrink: 2;
+    padding: 0 20px;
+  }
+
+  &__priority {
+    padding: 10px 20px;
+    flex-shrink: 1;
+    background-color: salmon;
+    border-radius: 25px;
+  }
+
+  &__deadline {
+    min-width: fit-content;
+    padding: 0 20px;
+    padding-right: 40px;
+    flex-shrink: 1;
+  }
+}
+
+.mini-task:hover {
+  background-color: ghostwhite;
+}
