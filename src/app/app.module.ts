@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreService } from './services/store.service';
+import { RepositoryService } from './services/repository.service';
+import { MaterialModule } from './material/material/material.module';
 
 @NgModule({
   declarations: [
@@ -12,9 +15,12 @@ import { StoreService } from './services/store.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MaterialModule,
   ],
   providers: [
     StoreService,
+    RepositoryService,
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent],
 })
