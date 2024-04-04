@@ -1,0 +1,33 @@
+.main-page {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__data {
+    text-align: center;
+  }
+
+  &__title {
+    text-align: center;
+  }
+
+  &__card {
+    width: 80%;
+    padding: 40px 60px;
+  }
+
+  &__tab {
+    margin-bottom: 60px;
+  }
+
+  &__add-btn {
+    width: fit-content;
+  }
+
+}
+
+:host ::ng-deep .mdc-tab__content {
+  font-size: 18px;
+}

@@ -1,0 +1,18 @@
+<section class="main-page">
+  <h2 class="main-page__data">{{currentDate | date: "d MMMM y, EEEE":"":"ru"}}</h2>
+  <h1 class="main-page__title">Добрый день!</h1>
+  <mat-card class="main-page__card">
+    <mat-card-content>Мои задачи:</mat-card-content>
+    <mat-tab-group animationDuration="0ms" class="main-page__tab">
+      <mat-tab label="Текущие">
+
+      </mat-tab>
+      <mat-tab label="Предстоит">Предстоит</mat-tab>
+      <mat-tab label="Выполнено">Выполнено</mat-tab>
+    </mat-tab-group>
+    <button mat-fab extended color="primary" class="main-page__add-btn">
+      <mat-icon>add</mat-icon>
+      Создать задачу
+    </button>
+  </mat-card>
+</section>

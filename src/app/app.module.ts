@@ -1,16 +1,24 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { registerLocaleData } from '@angular/common';
+import LocaleRu from '@angular/common/locales/ru';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreService } from './services/store.service';
 import { RepositoryService } from './services/repository.service';
 import { MaterialModule } from './material/material/material.module';
+import { MainPageComponent } from './pages/main-page/main-page.component';
+import { HeaderComponent } from './components/header/header.component';
+
+registerLocaleData(LocaleRu);
 
 @NgModule({
   declarations: [
     AppComponent,
+    MainPageComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
