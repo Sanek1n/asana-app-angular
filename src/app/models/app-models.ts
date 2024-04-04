@@ -15,9 +15,15 @@ interface Task {
   ended: boolean,
 }
 
-interface Store {
-  tasks: Task[],
-  users: User[],
+class Store {
+  tasks: Task[];
+
+  users: User[];
+
+  constructor() {
+    this.tasks = [];
+    this.users = [];
+  }
 }
 
 enum Priority {
