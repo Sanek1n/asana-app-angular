@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Task } from 'app/models/app-models';
+import { RepositoryService } from 'app/services/repository.service';
 
 @Component({
   selector: 'app-main-page',
@@ -8,7 +10,13 @@ import { Component } from '@angular/core';
 export class MainPageComponent {
   public currentDate: Date;
 
-  constructor() {
+  public taskItems: Task[] = [];
+
+  constructor(private dataSource: RepositoryService) {
     this.currentDate = new Date();
+    this.dataSource.getTasks()
+      .subscribe((data) => {
+        this.taskItems = data;
+      });
   }
 }

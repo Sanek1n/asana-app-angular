@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Task } from 'app/models/app-models';
 
 @Component({
   selector: 'app-mini-task',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './mini-task.component.scss',
 })
 export class MiniTaskComponent {
-
+  @Input()
+    taskData: Task | undefined;
 }

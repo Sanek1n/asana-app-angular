@@ -7,9 +7,9 @@
       <mat-tab label="Текущие">
         <mat-divider></mat-divider>
         <div class="main-page__tab">
-          <app-mini-task></app-mini-task>
-          <app-mini-task></app-mini-task>
-          <app-mini-task></app-mini-task>
+          @for (item of taskItems; track item) {
+            <app-mini-task [taskData]="item"></app-mini-task>
+          }
         </div>
       </mat-tab>
       <mat-tab label="Предстоит">
