@@ -6,12 +6,13 @@ import { Observable, map } from 'rxjs';
 
 function filterCurrentTasks(tasks: Task[]): Task[] {
   return tasks.filter(
-    (val) => ((val.beginDate <= new Date() || val.deadline <= new Date()) && !val.ended),
+    (val) => (new Date(val.beginDate) <= new Date()
+    || new Date(val.deadline) <= new Date()) && !val.ended,
   );
 }
 
 function filterComingTasks(tasks: Task[]): Task[] {
-  return tasks.filter((val) => (val.beginDate > new Date() && !val.ended));
+  return tasks.filter((val) => (new Date(val.beginDate) > new Date() && !val.ended));
 }
 
 function filterEndedTasks(tasks: Task[]): Task[] {
@@ -53,10 +54,10 @@ export class MainPageComponent {
   }
 
   completeTask(event: Task) {
-    this.dataSource.saveTask(event)
-      .subscribe({
-        complete: () => {
-        },
-      });
+    this.dataSource.saveTask(event);
+  }
+
+  loadData() {
+    this.taskItems = this.dataSource.getTasks();
   }
 }

@@ -7,7 +7,7 @@
       <mat-tab label="Текущие">
         <mat-divider></mat-divider>
         <div class="main-page__tab">
-          @for (item of taskItems | async; track item) {
+          @for (item of taskItems | async; track item.id) {
             <app-mini-task [taskData]="item" (endTask)="completeTask($event)"></app-mini-task>
           }
         </div>
@@ -15,7 +15,7 @@
       <mat-tab label="Предстоит">
         <mat-divider></mat-divider>
         <div class="main-page__tab">
-          @for (item of taskItems | async; track item) {
+          @for (item of taskItems | async; track item.id) {
             <app-mini-task [taskData]="item" (endTask)="completeTask($event)"></app-mini-task>
           }
         </div>
@@ -23,13 +23,13 @@
         <mat-tab label="Выполнено">
         <mat-divider></mat-divider>
         <div class="main-page__tab">
-          @for (item of taskItems | async; track item) {
+          @for (item of taskItems | async; track item.id) {
             <app-mini-task [taskData]="item" (endTask)="completeTask($event)"></app-mini-task>
           }
         </div>
       </mat-tab>
     </mat-tab-group>
-    <button mat-fab extended color="primary" class="main-page__add-btn">
+    <button mat-fab extended color="primary" class="main-page__add-btn" (click)="loadData()">
       <mat-icon>add</mat-icon>
       Создать задачу
     </button>

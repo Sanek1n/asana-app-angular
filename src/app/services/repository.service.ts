@@ -16,30 +16,26 @@ export class RepositoryService {
   private users: User[] = [];
 
   constructor(
-    private store: StoreService,
+    private storeService: StoreService,
   ) {
-    this.tasksSubject = new BehaviorSubject<Task[]>(new Store().tasks);
+    this.tasksSubject = new BehaviorSubject<Task[]>(this.storeService.store.tasks);
     this.tasks = this.tasksSubject.asObservable();
-    this.store.loadStore()
-      .subscribe((data) => {
-        this.tasksSubject.next(data.tasks);
-        this.tasksArray = data.tasks;
-        this.users = data.users;
-      });
+    this.tasksArray = this.tasksSubject.value;
+    this.users = this.storeService.store.users;
   }
 
   public getTasks(): Observable<Task[]> {
-    this.store.loadStore().subscribe((data) => {
-      this.tasksSubject.next(data.tasks);
-    });
+    this.tasksSubject.next(this.storeService.store.tasks);
     return this.tasks;
   }
 
   public getUsers(): User[] {
+    this.users = this.storeService.store.users;
     return this.users;
   }
 
   public getTask(id: number): Observable<Task | null> {
+    this.tasksSubject.next(this.storeService.store.tasks);
     const index: number = this.tasksSubject.value.findIndex((task) => task.id === id);
     if (index < 0) {
       return of(null);
@@ -48,6 +44,7 @@ export class RepositoryService {
   }
 
   public getUser(id: number): User | null {
+    this.users = this.storeService.store.users;
     const index: number = this.users.findIndex((user) => user.id === id);
     if (index < 0) {
       return null;
@@ -56,6 +53,7 @@ export class RepositoryService {
   }
 
   public createTask(newTask: Task): Observable<Task> {
+    this.tasksSubject.next(this.storeService.store.tasks);
     let maxIndex: number = 0;
     this.tasksSubject.value.forEach((task) => {
       if (task.id >= maxIndex) {
@@ -64,16 +62,16 @@ export class RepositoryService {
     });
     this.tasksArray.push({ ...newTask, id: maxIndex + 1 });
     this.tasksSubject.next(this.tasksSubject.value);
-    this.store.saveStore({ tasks: this.tasksSubject.value, users: this.users });
+    this.storeService.store = new Store(this.tasksArray, this.users);
     return of(this.tasksArray[this.tasksArray.length - 1]);
   }
 
-  public saveTask(newTask: Task): Observable<Task | null> {
+  public saveTask(newTask: Task): Observable<Task[]> {
     const index: number = this.tasksSubject.value.findIndex((task) => task.id === newTask.id);
     this.tasksArray.splice(index, 1, newTask);
     this.tasksSubject.next(this.tasksArray);
-    this.store.saveStore({ tasks: this.tasksSubject.value, users: this.users });
-    return of(newTask);
+    this.storeService.store = new Store(this.tasksArray, this.users);
+    return of(this.tasksArray);
   }
 
   public deleteTask(id: number): Observable<Task | null> {
@@ -81,7 +79,7 @@ export class RepositoryService {
     const deleteTask: Task | null = this.tasksSubject.value[index];
     this.tasksArray.splice(index, 1);
     this.tasksSubject.next(this.tasksArray);
-    this.store.saveStore({ tasks: this.tasksSubject.value, users: this.users });
+    this.storeService.store = new Store(this.tasksArray, this.users);
     return of(deleteTask);
   }
 }
