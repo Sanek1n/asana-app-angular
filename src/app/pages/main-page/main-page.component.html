@@ -8,7 +8,7 @@
         <mat-divider></mat-divider>
         <div class="main-page__tab">
           @for (item of taskItems | async; track item) {
-            <app-mini-task [taskData]="item"></app-mini-task>
+            <app-mini-task [taskData]="item" (endTask)="completeTask($event)"></app-mini-task>
           }
         </div>
       </mat-tab>
@@ -16,7 +16,7 @@
         <mat-divider></mat-divider>
         <div class="main-page__tab">
           @for (item of taskItems | async; track item) {
-            <app-mini-task [taskData]="item"></app-mini-task>
+            <app-mini-task [taskData]="item" (endTask)="completeTask($event)"></app-mini-task>
           }
         </div>
       </mat-tab>
@@ -24,7 +24,7 @@
         <mat-divider></mat-divider>
         <div class="main-page__tab">
           @for (item of taskItems | async; track item) {
-            <app-mini-task [taskData]="item"></app-mini-task>
+            <app-mini-task [taskData]="item" (endTask)="completeTask($event)"></app-mini-task>
           }
         </div>
       </mat-tab>

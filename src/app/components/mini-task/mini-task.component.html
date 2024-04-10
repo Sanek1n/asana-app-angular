@@ -2,10 +2,12 @@
   <mat-checkbox class="mini-task__complete"
     color="primary"
     matTooltip="Завершить задачу"
+    [checked]="taskData!.ended"
+    (change)="handlerComplete()"
   >
   </mat-checkbox>
   <p class="mini-task__name">{{taskData!.title}}</p>
   <p class="mini-task__priority">{{taskData!.priority}}</p>
-  <p class="mini-task__deadline">{{taskData!.beginDate | date: "d MMMM"}} - {{taskData!.deadline | date: "d MMMM"}}</p>
+  <p class="mini-task__deadline">{{taskData!.beginDate | date: "d MMMM":"":"ru"}} - {{taskData!.deadline | date: "d MMMM":"":"ru"}}</p>
 </li>
 <mat-divider></mat-divider>

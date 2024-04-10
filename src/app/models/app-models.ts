@@ -62,7 +62,7 @@ class Store {
         id: 3,
         title: 'Добавить кое-что',
         description: 'Добавить кое-что Добавить кое-что Добавить кое-что',
-        beginDate: new Date(2024, 3, 2),
+        beginDate: new Date(2024, 2, 29),
         deadline: new Date(2024, 3, 7),
         priority: Priority.HIGH,
         status: Status.PLAN,

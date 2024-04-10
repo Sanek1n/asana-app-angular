@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component, EventEmitter, Input, Output,
+} from '@angular/core';
 import { Task } from 'app/models/app-models';
 
 @Component({
@@ -9,4 +11,14 @@ import { Task } from 'app/models/app-models';
 export class MiniTaskComponent {
   @Input()
     taskData: Task | undefined;
+
+  @Output()
+    endTask = new EventEmitter<Task>();
+
+  handlerComplete() {
+    if (this.taskData) {
+      this.taskData.ended = !this.taskData.ended;
+      this.endTask.emit(this.taskData);
+    }
+  }
 }

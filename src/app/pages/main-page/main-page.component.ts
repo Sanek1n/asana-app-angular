@@ -5,11 +5,13 @@ import { RepositoryService } from 'app/services/repository.service';
 import { Observable, map } from 'rxjs';
 
 function filterCurrentTasks(tasks: Task[]): Task[] {
-  return tasks.filter((val) => val.beginDate <= new Date() || val.deadline <= new Date());
+  return tasks.filter(
+    (val) => ((val.beginDate <= new Date() || val.deadline <= new Date()) && !val.ended),
+  );
 }
 
 function filterComingTasks(tasks: Task[]): Task[] {
-  return tasks.filter((val) => val.beginDate > new Date());
+  return tasks.filter((val) => (val.beginDate > new Date() && !val.ended));
 }
 
 function filterEndedTasks(tasks: Task[]): Task[] {
@@ -48,5 +50,13 @@ export class MainPageComponent {
         break;
       default:
     }
+  }
+
+  completeTask(event: Task) {
+    this.dataSource.saveTask(event)
+      .subscribe({
+        complete: () => {
+        },
+      });
   }
 }
