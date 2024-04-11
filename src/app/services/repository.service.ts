@@ -36,7 +36,7 @@ export class RepositoryService {
 
   public getTask(id: number): Observable<Task | null> {
     this.tasksSubject.next(this.storeService.store.tasks);
-    const index: number = this.tasksSubject.value.findIndex((task) => task.id === id);
+    const index: number = this.tasksSubject.value.findIndex((task: Task) => task.id === id);
     if (index < 0) {
       return of(null);
     }
@@ -45,7 +45,7 @@ export class RepositoryService {
 
   public getUser(id: number): User | null {
     this.users = this.storeService.store.users;
-    const index: number = this.users.findIndex((user) => user.id === id);
+    const index: number = this.users.findIndex((user: User) => user.id === id);
     if (index < 0) {
       return null;
     }
@@ -55,7 +55,7 @@ export class RepositoryService {
   public createTask(newTask: Task): Observable<Task> {
     this.tasksSubject.next(this.storeService.store.tasks);
     let maxIndex: number = 0;
-    this.tasksSubject.value.forEach((task) => {
+    this.tasksSubject.value.forEach((task: Task) => {
       if (task.id >= maxIndex) {
         maxIndex = task.id;
       }
@@ -67,7 +67,7 @@ export class RepositoryService {
   }
 
   public saveTask(newTask: Task): Observable<Task[]> {
-    const index: number = this.tasksSubject.value.findIndex((task) => task.id === newTask.id);
+    const index: number = this.tasksSubject.value.findIndex((task: Task) => task.id === newTask.id);
     this.tasksArray.splice(index, 1, newTask);
     this.tasksSubject.next(this.tasksArray);
     this.storeService.store = new Store(this.tasksArray, this.users);
@@ -75,7 +75,7 @@ export class RepositoryService {
   }
 
   public deleteTask(id: number): Observable<Task | null> {
-    const index: number = this.tasksSubject.value.findIndex((task) => task.id === id);
+    const index: number = this.tasksSubject.value.findIndex((task: Task) => task.id === id);
     const deleteTask: Task | null = this.tasksSubject.value[index];
     this.tasksArray.splice(index, 1);
     this.tasksSubject.next(this.tasksArray);

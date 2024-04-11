@@ -37,9 +37,9 @@ export class MainPageComponent implements OnInit {
   constructor(private dataSource: RepositoryService) {
     this.currentDate = new Date();
     this.taskItems = this.dataSource.getTasks()
-      .pipe(map((el) => filterCurrentTasks(el)));
+      .pipe(map((el: Task[]) => filterCurrentTasks(el)));
     this.taskItems.subscribe({
-      next: (data) => {
+      next: (data: Task[]) => {
         this.countTasks = data.length;
       },
     });
@@ -53,23 +53,23 @@ export class MainPageComponent implements OnInit {
     switch (event.index) {
       case 0:
         this.taskItems = this.dataSource.getTasks()
-          .pipe(map((el) => filterCurrentTasks(el)));
+          .pipe(map((el: Task[]) => filterCurrentTasks(el)));
         this.showButtonAdd = true;
         break;
       case 1:
         this.taskItems = this.dataSource.getTasks()
-          .pipe(map((el) => filterExpiredTasks(el)));
+          .pipe(map((el: Task[]) => filterExpiredTasks(el)));
         this.showButtonAdd = false;
         break;
       case 2:
         this.taskItems = this.dataSource.getTasks()
-          .pipe(map((el) => filterEndedTasks(el)));
+          .pipe(map((el: Task[]) => filterEndedTasks(el)));
         this.showButtonAdd = false;
         break;
       default:
     }
     this.taskItems.subscribe({
-      next: (data) => {
+      next: (data: Task[]) => {
         this.countTasks = data.length;
       },
     });
@@ -77,9 +77,9 @@ export class MainPageComponent implements OnInit {
 
   setLabelExpired(): void {
     this.dataSource.getTasks()
-      .pipe(map((el) => filterExpiredTasks(el)))
+      .pipe(map((el: Task[]) => filterExpiredTasks(el)))
       .subscribe({
-        next: (data) => {
+        next: (data: Task[]) => {
           this.labelExpired = `Просрочено (${data.length})`;
         },
       });
