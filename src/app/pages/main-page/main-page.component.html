@@ -2,36 +2,50 @@
   <h2 class="main-page__data">{{currentDate | date: "d MMMM y, EEEE":"":"ru"}}</h2>
   <h1 class="main-page__title">Добрый день!</h1>
   <mat-card class="main-page__card">
-    <mat-card-content>Мои задачи:</mat-card-content>
+    <mat-card-content class="main-page__header">Мои задачи:</mat-card-content>
     <mat-tab-group animationDuration="0ms" class="main-page__group" (selectedTabChange)="handlerChange($event)">
       <mat-tab label="Текущие">
         <mat-divider></mat-divider>
         <div class="main-page__tab">
-          @for (item of taskItems | async; track item.id) {
-            <app-mini-task [taskData]="item" (endTask)="completeTask($event)"></app-mini-task>
+          @if (countTasks > 0) {
+            @for (item of taskItems | async; track item.id) {
+              <app-mini-task [taskData]="item" (endTask)="completeTask($event)"></app-mini-task>
+            }
+          } @else {
+            <p class="main-page__notes">Здесь будут отображаться ваши текущие задачи.</p>
           }
         </div>
       </mat-tab>
-      <mat-tab label="Предстоит">
+      <mat-tab label="Просроченные">
         <mat-divider></mat-divider>
         <div class="main-page__tab">
-          @for (item of taskItems | async; track item.id) {
-            <app-mini-task [taskData]="item" (endTask)="completeTask($event)"></app-mini-task>
+          @if (countTasks > 0) {
+            @for (item of taskItems | async; track item.id) {
+              <app-mini-task [taskData]="item" (endTask)="completeTask($event)"></app-mini-task>
+            }
+          } @else {
+            <p class="main-page__notes">Здесь будут отображаться просроченные задачи.</p>
           }
         </div>
       </mat-tab>
         <mat-tab label="Выполнено">
         <mat-divider></mat-divider>
         <div class="main-page__tab">
-          @for (item of taskItems | async; track item.id) {
-            <app-mini-task [taskData]="item" (endTask)="completeTask($event)"></app-mini-task>
+          @if (countTasks > 0) {
+            @for (item of taskItems | async; track item.id) {
+              <app-mini-task [taskData]="item" (endTask)="completeTask($event)"></app-mini-task>
+            }
+          } @else {
+            <p class="main-page__notes">Здесь будут отображаться выполненые вами задачи.</p>
           }
         </div>
       </mat-tab>
     </mat-tab-group>
-    <button mat-fab extended color="primary" class="main-page__add-btn" (click)="loadData()">
-      <mat-icon>add</mat-icon>
-      Создать задачу
-    </button>
+    @if (showButtonAdd) {
+      <button mat-fab extended color="primary" class="main-page__add-btn" (click)="loadData()">
+        <mat-icon>add</mat-icon>
+        Создать задачу
+      </button>
+    }
   </mat-card>
 </section>

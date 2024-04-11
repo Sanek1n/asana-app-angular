@@ -13,6 +13,16 @@
     text-align: center;
   }
 
+  &__header {
+    font-size: 24px;
+    padding: 20px;
+    cursor: pointer;
+  }
+
+  &__header:hover {
+    text-decoration: underline;
+  }
+
   &__card {
     width: 80%;
     padding: 40px 0px;
@@ -28,8 +38,15 @@
     flex-direction: column;
   }
 
+  &__notes {
+    text-align: center;
+    font-size: 18px;
+    font-style: italic;
+  }
+
   &__add-btn {
     width: fit-content;
+    margin-left: 20px;
   }
 
 }
