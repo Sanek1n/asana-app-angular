@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { CreateTaskComponent } from 'app/components/create-task/create-task.component';
 import { Task } from 'app/models/app-models';
 import { RepositoryService } from 'app/services/repository.service';
 import { Observable, map } from 'rxjs';
@@ -34,7 +36,10 @@ export class MainPageComponent implements OnInit {
 
   public labelExpired: string = '';
 
-  constructor(private dataSource: RepositoryService) {
+  constructor(
+    private dataSource: RepositoryService,
+    public dialog: MatDialog,
+  ) {
     this.currentDate = new Date();
     this.taskItems = this.dataSource.getTasks()
       .pipe(map((el: Task[]) => filterCurrentTasks(el)));
@@ -91,6 +96,10 @@ export class MainPageComponent implements OnInit {
   }
 
   addTask() {
-    this.taskItems = this.dataSource.getTasks();
+    const dialogRef = this.dialog.open(CreateTaskComponent);
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.dataSource.getTasks();
+    });
   }
 }
