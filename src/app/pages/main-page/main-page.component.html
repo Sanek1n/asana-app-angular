@@ -16,7 +16,7 @@
           }
         </div>
       </mat-tab>
-      <mat-tab label="Просроченные">
+      <mat-tab [label]="labelExpired">
         <mat-divider></mat-divider>
         <div class="main-page__tab">
           @if (countTasks > 0) {
@@ -42,7 +42,7 @@
       </mat-tab>
     </mat-tab-group>
     @if (showButtonAdd) {
-      <button mat-fab extended color="primary" class="main-page__add-btn" (click)="loadData()">
+      <button mat-fab extended color="primary" class="main-page__add-btn" (click)="addTask()">
         <mat-icon>add</mat-icon>
         Создать задачу
       </button>

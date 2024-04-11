@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Task } from 'app/models/app-models';
 import { RepositoryService } from 'app/services/repository.service';
@@ -6,13 +6,12 @@ import { Observable, map } from 'rxjs';
 
 function filterCurrentTasks(tasks: Task[]): Task[] {
   return tasks.filter(
-    (val) => (new Date(val.beginDate) <= new Date()
-    || new Date(val.deadline) <= new Date()) && !val.ended,
+    (val) => (new Date(val.deadline) >= new Date()) && !val.ended,
   );
 }
 
-function filterComingTasks(tasks: Task[]): Task[] {
-  return tasks.filter((val) => (new Date(val.deadline) < new Date() && !val.ended));
+function filterExpiredTasks(tasks: Task[]): Task[] {
+  return tasks.filter((val) => (new Date(val.deadline) <= new Date() && !val.ended));
 }
 
 function filterEndedTasks(tasks: Task[]): Task[] {
@@ -24,7 +23,7 @@ function filterEndedTasks(tasks: Task[]): Task[] {
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss',
 })
-export class MainPageComponent {
+export class MainPageComponent implements OnInit {
   public currentDate: Date;
 
   public countTasks: number = 0;
@@ -32,6 +31,8 @@ export class MainPageComponent {
   public showButtonAdd = true;
 
   public taskItems: Observable<Task[]>;
+
+  public labelExpired: string = '';
 
   constructor(private dataSource: RepositoryService) {
     this.currentDate = new Date();
@@ -44,7 +45,11 @@ export class MainPageComponent {
     });
   }
 
-  handlerChange(event: MatTabChangeEvent) {
+  ngOnInit(): void {
+    this.setLabelExpired();
+  }
+
+  handlerChange(event: MatTabChangeEvent):void {
     switch (event.index) {
       case 0:
         this.taskItems = this.dataSource.getTasks()
@@ -53,7 +58,7 @@ export class MainPageComponent {
         break;
       case 1:
         this.taskItems = this.dataSource.getTasks()
-          .pipe(map((el) => filterComingTasks(el)));
+          .pipe(map((el) => filterExpiredTasks(el)));
         this.showButtonAdd = false;
         break;
       case 2:
@@ -70,11 +75,22 @@ export class MainPageComponent {
     });
   }
 
-  completeTask(event: Task) {
-    this.dataSource.saveTask(event);
+  setLabelExpired(): void {
+    this.dataSource.getTasks()
+      .pipe(map((el) => filterExpiredTasks(el)))
+      .subscribe({
+        next: (data) => {
+          this.labelExpired = `Просрочено (${data.length})`;
+        },
+      });
   }
 
-  loadData() {
+  completeTask(event: Task): void {
+    this.dataSource.saveTask(event);
+    this.setLabelExpired();
+  }
+
+  addTask() {
     this.taskItems = this.dataSource.getTasks();
   }
 }
