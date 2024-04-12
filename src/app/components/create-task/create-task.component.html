@@ -1,12 +1,15 @@
 <h2 mat-dialog-title>Добавить задачу</h2>
 <mat-dialog-content class="mat-typography">
-  <form class="create-task" [formGroup]="createForm" (ngSubmit)="submitForm()">
+  <form class="create-task" [formGroup]="createForm">
     <mat-form-field class="example-full-width create-task__title">
       <mat-label>Название задачи</mat-label>
       <input matInput
       formControlName="titleForm"
         placeholder="Напишите название задачи"
       >
+      @if (!createForm.controls.titleForm.hasError("requred")) {
+        <mat-error><strong>Необходимо</strong> ввести название задачи</mat-error>
+      }
     </mat-form-field>
     <mat-form-field class="create-task__date">
       <mat-label>Срок выполнения</mat-label>
@@ -17,15 +20,27 @@
       <mat-hint>ДД/ММ/ГГГГ – ДД/ММ/ГГГГ</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
+      @if (!createForm.controls.beginForm.hasError("requred") || !createForm.controls.endForm.hasError("requred")) {
+        <mat-error><strong>Необходимо</strong> заполнить срок выполнения задачи</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="create-task__priority">
+      <mat-label>Приоритет</mat-label>
+      <mat-select formControlName="priorityForm">
+        @for (priority of priorityList; track priority) {
+          <mat-option [value]="priority[1]">{{priority[1]}}</mat-option>
+        }
+      </mat-select>
     </mat-form-field>
     <mat-dialog-actions align="end">
       <button mat-flat-button mat-dialog-close>Отмена</button>
       <button
         mat-flat-button
         color="primary"
-        [mat-dialog-close]="true"
         cdkFocusInitial
-        type="submit"
+        type="button"
+        [disabled]="!createForm.valid"
+        (click)="submitForm()"
       >Сохранить</button>
     </mat-dialog-actions>
   </form>

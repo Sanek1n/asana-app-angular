@@ -13,6 +13,7 @@ import { MatDivider } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
 
 const materialComponents: Array<object> = [
   MatIconModule,
@@ -29,6 +30,7 @@ const materialComponents: Array<object> = [
   MatTooltipModule,
   MatDialogModule,
   MatDatepickerModule,
+  MatSelectModule,
 ];
 
 @NgModule({
