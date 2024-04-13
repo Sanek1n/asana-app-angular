@@ -28,7 +28,7 @@
       <mat-label>Приоритет</mat-label>
       <mat-select formControlName="priorityForm">
         @for (priority of priorityList; track priority) {
-          <mat-option [value]="priority[1]">{{priority[1]}}</mat-option>
+          <mat-option class="create-task__priority-color" [value]="priority[1]" [appPriority]="priority[1]">{{priority[1]}}</mat-option>
         }
       </mat-select>
     </mat-form-field>

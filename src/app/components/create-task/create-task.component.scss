@@ -1,3 +1,5 @@
+@import './styles/colors.scss';
+
 :host {
   display: flex;
   flex-direction: column;
@@ -17,6 +19,26 @@
 
   &__priority {
     margin-top: 10px;
-    
+  }
+
+  &__priority-color::after {
+    content: '';
+    width: 30px;
+    height: 20px;
+    border-radius: 5px;
+    margin-left: 20px;
+  }
+
+  &__priority-color.low::after {
+    background-color: $priority-low-color;
+  }
+
+  &__priority-color.medium::after {
+    background-color: $priority-medium-color;
+  }
+
+  &__priority-color.high::after {
+    background-color: $priority-high-color;
   }
 }
+

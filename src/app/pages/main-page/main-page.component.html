@@ -9,7 +9,10 @@
         <div class="main-page__tab">
           @if (countTasks > 0) {
             @for (item of taskItems | async; track item.id) {
-              <app-mini-task [taskData]="item" (endTask)="completeTask($event)"></app-mini-task>
+              <app-mini-task
+                [taskData]="item"
+                (endTask)="completeTask($event)"
+              ></app-mini-task>
             }
           } @else {
             <p class="main-page__notes">Здесь будут отображаться ваши текущие задачи.</p>

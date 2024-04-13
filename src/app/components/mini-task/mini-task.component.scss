@@ -1,3 +1,5 @@
+@import './styles/colors.scss';
+
 .mini-task {
   display: flex;
   justify-content: space-between;
@@ -17,19 +19,38 @@
     padding: 0 20px;
   }
 
-  &__priority {
-    padding: 10px 20px;
-    flex-shrink: 1;
-    background-color: salmon;
-    border-radius: 25px;
-  }
-
   &__deadline {
     min-width: fit-content;
     padding: 0 20px;
     padding-right: 40px;
     flex-shrink: 1;
   }
+
+  &__prioriy {
+    flex-shrink: 1;
+    width: 60px;
+    height: 50px;
+    overflow: hidden;
+  }
+
+  &__prioriy-color {
+    width: 120px;
+    height: 120px;
+    transform: rotate(45deg) translateX(-30px) translateY(60px);
+  }
+
+}
+
+.mini-task__priority_low {
+  background-color: $priority-low-color;
+}
+
+.mini-task__priority_medium {
+  background-color: $priority-medium-color;
+}
+
+.mini-task__priority_high {
+  background-color: $priority-high-color;
 }
 
 .mini-task:hover {
