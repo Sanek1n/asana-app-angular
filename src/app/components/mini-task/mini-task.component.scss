@@ -1,6 +1,7 @@
 @import './styles/colors.scss';
 
 .mini-task {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,7 +23,7 @@
   &__deadline {
     min-width: fit-content;
     padding: 0 20px;
-    padding-right: 40px;
+    padding-right: 60px;
     flex-shrink: 1;
   }
 
@@ -39,6 +40,12 @@
     transform: rotate(45deg) translateX(-30px) translateY(60px);
   }
 
+  &__delete {
+    position: absolute;
+    right: 5px;
+    transition: .3s;
+    opacity: 0;
+  }
 }
 
 .mini-task__priority_low {
@@ -55,4 +62,8 @@
 
 .mini-task:hover {
   background-color: ghostwhite;
+
+  .mini-task__delete {
+    opacity: 1;
+  }
 }

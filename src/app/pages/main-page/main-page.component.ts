@@ -90,16 +90,20 @@ export class MainPageComponent implements OnInit {
       });
   }
 
-  completeTask(event: Task): void {
-    this.dataSource.saveTask(event);
+  completeTask(task: Task): void {
+    this.dataSource.saveTask(task);
     this.setLabelExpired();
   }
 
-  addTask() {
+  addTask(): void {
     const dialogRef = this.dialog.open(CreateTaskComponent);
-
     dialogRef.afterClosed().subscribe(() => {
       this.dataSource.getTasks();
     });
+  }
+
+  deleteTask(id: number) {
+    this.dataSource.deleteTask(id);
+    this.setLabelExpired();
   }
 }

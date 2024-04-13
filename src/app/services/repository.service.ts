@@ -75,6 +75,7 @@ export class RepositoryService {
   }
 
   public deleteTask(id: number): Observable<Task | null> {
+    this.tasksSubject.next(this.storeService.store.tasks);
     const index: number = this.tasksSubject.value.findIndex((task: Task) => task.id === id);
     const deleteTask: Task | null = this.tasksSubject.value[index];
     this.tasksArray.splice(index, 1);

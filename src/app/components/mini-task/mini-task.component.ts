@@ -15,16 +15,25 @@ export class MiniTaskComponent implements OnInit {
   @Output()
     endTask = new EventEmitter<Task>();
 
+  @Output()
+    deleteTask = new EventEmitter<number>();
+
   public priorityTooltip: string = '';
 
   ngOnInit(): void {
     this.priorityTooltip = (this.taskData?.priority !== '' ? `Приоритет ${this.taskData?.priority}` : 'Приоритет не задан');
   }
 
-  handlerComplete() {
+  handlerComplete(): void {
     if (this.taskData) {
       this.taskData.ended = !this.taskData.ended;
       this.endTask.emit(this.taskData);
+    }
+  }
+
+  handlerDelete(): void {
+    if (this.taskData) {
+      this.deleteTask.emit(this.taskData.id);
     }
   }
 }

@@ -14,5 +14,16 @@
   </mat-checkbox>
   <p class="mini-task__name">{{taskData!.title}}</p>
   <p class="mini-task__deadline">{{taskData!.beginDate | date: "d MMMM":"":"ru"}} - {{taskData!.deadline | date: "d MMMM":"":"ru"}}</p>
+  <div class="mini-task__delete">
+    <button
+      mat-mini-fab
+      matTooltip="Удалить задачу"
+      color="primary"
+      aria-label="Delete"
+      (click)="handlerDelete()"
+    >
+      <mat-icon>delete_outline</mat-icon>
+    </button>
+  </div>
 </li>
 <mat-divider></mat-divider>
