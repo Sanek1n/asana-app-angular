@@ -42,8 +42,8 @@ export class CreateTaskComponent {
       this.dataSource.createTask({
         ...this.newTask,
         title: this.createForm.value.titleForm as string,
-        beginDate: this.createForm.value.beginForm as Date,
-        deadline: this.createForm.value.endForm as Date,
+        beginDate: new Date((this.createForm.value.beginForm as Date).setHours(0, 0, 0)),
+        deadline: new Date((this.createForm.value.endForm as Date).setHours(23, 59, 59)),
         priority: this.createForm.value.priorityForm as Priority,
       })
         .subscribe({
