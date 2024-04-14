@@ -2,7 +2,7 @@
   <h2 class="main-page__data">{{currentDate | date: "d MMMM y, EEEE":"":"ru"}}</h2>
   <h1 class="main-page__title">Добрый день!</h1>
   <mat-card class="main-page__card">
-    <mat-card-content class="main-page__header">Мои задачи:</mat-card-content>
+    <mat-card-content class="main-page__header" routerLink="/list">Мои задачи:</mat-card-content>
     <mat-tab-group animationDuration="0ms" class="main-page__group" (selectedTabChange)="handlerChange($event)">
       <mat-tab label="Текущие">
         <mat-divider></mat-divider>
@@ -13,6 +13,7 @@
                 [taskData]="item"
                 (endTask)="completeTask($event)"
                 (deleteTask)="deleteTask($event)"
+                [routerLink]="['/task', item.id]"
               ></app-mini-task>
             }
           } @else {
@@ -29,6 +30,7 @@
                 [taskData]="item"
                 (endTask)="completeTask($event)"
                 (deleteTask)="deleteTask($event)"
+                [routerLink]="['/task', item.id]"
               ></app-mini-task>
             }
           } @else {
@@ -45,6 +47,7 @@
                 [taskData]="item"
                 (endTask)="completeTask($event)"
                 (deleteTask)="deleteTask($event)"
+                [routerLink]="['/task', item.id]"
               ></app-mini-task>
             }
           } @else {

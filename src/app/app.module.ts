@@ -17,6 +17,8 @@ import { MiniTaskComponent } from './components/mini-task/mini-task.component';
 import { CreateTaskComponent } from './components/create-task/create-task.component';
 import { PriorityDirective } from './directives/priority.directive';
 import { PriorityTaskDirective } from './directives/priority-task.directive';
+import { EditPageComponent } from './pages/edit-page/edit-page.component';
+import { ListPageComponent } from './pages/list-page/list-page.component';
 
 registerLocaleData(LocaleRu, 'ru');
 
@@ -29,6 +31,8 @@ registerLocaleData(LocaleRu, 'ru');
     CreateTaskComponent,
     PriorityDirective,
     PriorityTaskDirective,
+    EditPageComponent,
+    ListPageComponent,
   ],
   imports: [
     BrowserModule,
