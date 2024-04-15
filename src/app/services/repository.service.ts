@@ -67,6 +67,7 @@ export class RepositoryService {
   }
 
   public saveTask(newTask: Task): Observable<Task[]> {
+    this.tasksSubject.next(this.storeService.store.tasks);
     const index: number = this.tasksSubject.value.findIndex((task: Task) => task.id === newTask.id);
     this.tasksArray.splice(index, 1, newTask);
     this.tasksSubject.next(this.tasksArray);

@@ -19,6 +19,7 @@ import { PriorityDirective } from './directives/priority.directive';
 import { PriorityTaskDirective } from './directives/priority-task.directive';
 import { EditPageComponent } from './pages/edit-page/edit-page.component';
 import { ListPageComponent } from './pages/list-page/list-page.component';
+import { StatusDirective } from './directives/status.directive';
 
 registerLocaleData(LocaleRu, 'ru');
 
@@ -31,6 +32,7 @@ registerLocaleData(LocaleRu, 'ru');
     CreateTaskComponent,
     PriorityDirective,
     PriorityTaskDirective,
+    StatusDirective,
     EditPageComponent,
     ListPageComponent,
   ],

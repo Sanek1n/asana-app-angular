@@ -1,1 +1,73 @@
-<p>edit-page works!</p>
+<mat-card class="container">
+  <mat-dialog-content class="mat-typography">
+    <button
+      class="complete-btn"
+      mat-raised-button
+      (click)="completeTask()"
+      [ngClass]="editTask.ended ? 'complete' : ''"
+    ><mat-icon>done</mat-icon> Выполнено</button>
+    <form class="edit-task" [formGroup]="editForm">
+      <mat-form-field class="example-full-width edit-task__title">
+        <mat-label>Название задачи</mat-label>
+        <input matInput
+        formControlName="titleForm"
+          placeholder="Напишите название задачи"
+        >
+        @if (!editForm.controls.titleForm.hasError("requred")) {
+          <mat-error><strong>Необходимо</strong> ввести название задачи</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="edit-task__date">
+        <mat-label>Срок выполнения</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate placeholder="Начальная дата" formControlName="beginForm">
+          <input matEndDate placeholder="Конечная дата" formControlName="endForm">
+        </mat-date-range-input>
+        <mat-hint>ДД/ММ/ГГГГ – ДД/ММ/ГГГГ</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+        @if (!editForm.controls.beginForm.hasError("requred") || !editForm.controls.endForm.hasError("requred")) {
+          <mat-error><strong>Необходимо</strong> заполнить срок выполнения задачи</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="edit-task__priority">
+        <mat-label>Приоритет</mat-label>
+        <mat-select formControlName="priorityForm">
+          @for (priority of priorityList; track priority) {
+            <mat-option class="edit-task__priority-color" [value]="priority[1]" [appPriority]="priority[1]">{{priority[1]}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="edit-task__priority">
+        <mat-label>Статус</mat-label>
+        <mat-select formControlName="statusForm">
+          @for (status of statusList; track status) {
+            <mat-option class="edit-task__status-color" [value]="status[1]" [appStatus]="status[1]">{{status[1]}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="edit-task__description">
+        <mat-label>Описание</mat-label>
+        <textarea
+          matInput
+          formControlName="descForm"
+          rows="3"
+        ></textarea>
+      </mat-form-field>
+    </form>
+    <mat-dialog-actions class="edit-task__controls">
+      <button
+      class="edit-task__cancel"
+        mat-flat-button
+        mat-dialog-close
+        (click)="cancelEdit()"
+      >Отмена</button>
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        (click)="submitForm()"
+      >Сохранить</button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</mat-card>
