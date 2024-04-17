@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Task } from 'app/models/app-models';
+import { Priority, Status, Task } from 'app/models/app-models';
 import { RepositoryService } from 'app/services/repository.service';
 import { map } from 'rxjs';
 
@@ -27,21 +27,8 @@ export class ListPageComponent implements OnInit {
   sortBy(property: string) {
     this.sortOrder = this.getOrder(property, this.sortOrder);
     this.sortProperty = property;
-    let callback: (a: Task, b: Task) => number;
-    switch (this.sortProperty) {
-      case 'ended':
-        callback = this.sortEnded.bind(this);
-        break;
-      case 'title':
-        callback = this.sortTitle.bind(this);
-        break;
-      case 'beginDate':
-        callback = this.sortDate.bind(this);
-        break;
-      default:
-    }
     this.dataSource.getTasks()
-      .pipe(map((data: Task[]) => data.sort(callback)))
+      .pipe(map((data: Task[]) => data.sort(this.sortFunction.bind(this))))
       .subscribe((data: Task[]) => {
         this.tasks = data;
       });
@@ -75,27 +62,28 @@ export class ListPageComponent implements OnInit {
     return newOrder;
   }
 
-  sortEnded(el1: Task, el2: Task): number {
-    const result = Number(el1.ended) - Number(el2.ended);
-    return result * this.sortOrder;
-  }
-
-  sortTitle(el1: Task, el2: Task): number {
+  sortFunction(el1: Task, el2: Task): number {
+    type Keys = keyof typeof el1;
+    const index = Object.keys(el1).findIndex((val) => val === this.sortProperty);
+    const key: Keys = Object.keys(el1)[index] as Keys;
     let result = 0;
-    if (el1.title < el2.title) {
-      result = -1;
-    } else {
-      result = 1;
-    }
-    return result * this.sortOrder;
-  }
-
-  sortDate(el1: Task, el2: Task): number {
-    let result = 0;
-    if (el1.beginDate < el2.beginDate) {
-      result = -1;
-    } else {
-      result = 1;
+    const priorityArray: Array<Priority> = Object.values(Priority);
+    const statusArray: Array<Status> = Object.values(Status);
+    switch (key) {
+      case 'priority':
+        result = priorityArray.findIndex((val: Priority) => val === el1.priority)
+          - priorityArray.findIndex((val: Priority) => val === el2.priority);
+        break;
+      case 'status':
+        result = statusArray.findIndex((val: Status) => val === el1.status)
+          - statusArray.findIndex((val: Status) => val === el2.status);
+        break;
+      default:
+        if (el1[key] < el2[key]) {
+          result = -1;
+        } else {
+          result = 1;
+        }
     }
     return result * this.sortOrder;
   }
