@@ -1,1 +1,29 @@
-<p>list-page works!</p>
+<mat-card class="container">
+  <h2>Мои задачи</h2>
+  <div class="card-body">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th><button (click)="sortBy('ended')">Выполнено {{sortIcon('ended')}}</button></th>
+                <th><button (click)="sortBy('title')">Задача {{sortIcon('title')}}</button></th>
+                <th><button (click)="sortBy('beginDate')">Начало {{sortIcon('beginDate')}}</button></th>
+                <th><button (click)="sortBy('deadline')">Окончание {{sortIcon('dealine')}}</button></th>
+                <th><button (click)="sortBy('priority')">Приоритет {{sortIcon('priority')}}</button></th>
+                <th><button (click)="sortBy('status')">Статус {{sortIcon('status')}}</button></th>
+            </tr>
+        </thead>
+        <tbody>
+          @for (task of tasks; track task.id) {
+          <tr>
+              <td>{{task.ended}}</td>
+              <td>{{task.title}}</td>
+              <td>{{task.beginDate | date: "dd.MM.YYYY":"":"ru"}}</td>
+              <td>{{task.deadline | date: "dd.MM.YYYY":"":"ru"}}</td>
+              <td>{{task.priority}}</td>
+              <td>{{task.status}}</td>
+          </tr>
+          }
+        </tbody>
+    </table>
+</div>
+</mat-card>
