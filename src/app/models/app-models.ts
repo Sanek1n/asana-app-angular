@@ -15,6 +15,11 @@ interface Task {
   ended: boolean,
 }
 
+interface Columns {
+  name: string,
+  title: string
+}
+
 enum Priority {
   EMPTY = '',
   LOW = 'низкий',
@@ -123,4 +128,5 @@ export {
   Priority,
   Status,
   Store,
+  Columns,
 };

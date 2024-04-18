@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Priority, Status, Task } from 'app/models/app-models';
+import {
+  Columns, Priority, Status, Task,
+} from 'app/models/app-models';
 import { RepositoryService } from 'app/services/repository.service';
 import { map } from 'rxjs';
 
@@ -14,6 +16,15 @@ export class ListPageComponent implements OnInit {
   public sortProperty: string = 'id';
 
   public sortOrder: number = 0;
+
+  public tableColumn: Columns[] = [
+    { name: 'ended', title: 'Выполнено' },
+    { name: 'title', title: 'Задача' },
+    { name: 'beginDate', title: 'Начало' },
+    { name: 'deadline', title: 'Окончание' },
+    { name: 'priority', title: 'Приоритет' },
+    { name: 'status', title: 'Статус' },
+  ];
 
   constructor(private dataSource: RepositoryService) {}
 
@@ -32,13 +43,6 @@ export class ListPageComponent implements OnInit {
       .subscribe((data: Task[]) => {
         this.tasks = data;
       });
-  }
-
-  sortIcon(property: string): string {
-    if (property === this.sortProperty) {
-      return this.sortOrder === 1 ? '☝️' : '👇';
-    }
-    return '';
   }
 
   getOrder(property: string, oldOrder: number): number {
