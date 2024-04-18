@@ -21,6 +21,7 @@ import { EditPageComponent } from './pages/edit-page/edit-page.component';
 import { ListPageComponent } from './pages/list-page/list-page.component';
 import { StatusDirective } from './directives/status.directive';
 import { TableTaskComponent } from './components/table-task/table-task.component';
+import { FilterComponent } from './components/filter/filter.component';
 
 registerLocaleData(LocaleRu, 'ru');
 
@@ -37,6 +38,7 @@ registerLocaleData(LocaleRu, 'ru');
     EditPageComponent,
     ListPageComponent,
     TableTaskComponent,
+    FilterComponent,
   ],
   imports: [
     BrowserModule,

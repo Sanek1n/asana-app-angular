@@ -1,0 +1,29 @@
+@import './styles/colors.scss';
+
+.menu {
+
+  &__header{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__filter {
+    width: 100%;
+  }
+
+  &__option {
+    font-size: 14px;
+  }
+}
+
+.filter__btn {
+  width: 30px;
+  height: 30px;
+  padding: 3px 0;
+}
+
+.filter__active {
+  background-color: $status-plan-color;
+}

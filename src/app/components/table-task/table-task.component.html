@@ -4,10 +4,11 @@
           @for (column of tableColumn; track column) {
               <th>
                   {{column.title}}
-                  <button>
-                      <mat-icon>filter_list</mat-icon>
-                  </button>
-                  <button (click)="sortBy(column.name)">
+                  <!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>filter_list</mat-icon>
+                  </button> -->
+                  <app-filter></app-filter>
+                  <button mat-icon-button (click)="sortBy(column.name)" class="sort__btn">
                       @if (sortProperty === column.name) {
                           @switch (sortOrder) {
                               @case (-1) {
