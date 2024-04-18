@@ -20,6 +20,7 @@ import { PriorityTaskDirective } from './directives/priority-task.directive';
 import { EditPageComponent } from './pages/edit-page/edit-page.component';
 import { ListPageComponent } from './pages/list-page/list-page.component';
 import { StatusDirective } from './directives/status.directive';
+import { TableTaskComponent } from './components/table-task/table-task.component';
 
 registerLocaleData(LocaleRu, 'ru');
 
@@ -35,6 +36,7 @@ registerLocaleData(LocaleRu, 'ru');
     StatusDirective,
     EditPageComponent,
     ListPageComponent,
+    TableTaskComponent,
   ],
   imports: [
     BrowserModule,

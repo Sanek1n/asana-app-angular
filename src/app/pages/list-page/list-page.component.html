@@ -1,39 +1,6 @@
 <mat-card class="container">
   <h2>Мои задачи</h2>
   <div class="card-body">
-    <table class="table table-striped table-sm">
-        <thead>
-            <tr>
-                @for (column of tableColumn; track column) {
-                    <th>
-                        <button (click)="sortBy(column.name)">{{column.title}}
-                            @if (sortProperty === column.name) {
-                                @switch (sortOrder) {
-                                    @case (-1) {
-                                        <mat-icon>sort</mat-icon>
-                                    }
-                                    @case (1) {
-                                        <mat-icon style="transform: scale(1, -1)">sort</mat-icon>
-                                    }
-                                }
-                            }
-                        </button>
-                    </th>
-                }
-            </tr>
-        </thead>
-        <tbody>
-          @for (task of tasks; track task.id) {
-          <tr>
-              <td>{{task.ended}}</td>
-              <td>{{task.title}}</td>
-              <td>{{task.beginDate | date: "dd.MM.YYYY":"":"ru"}}</td>
-              <td>{{task.deadline | date: "dd.MM.YYYY":"":"ru"}}</td>
-              <td>{{task.priority}}</td>
-              <td>{{task.status}}</td>
-          </tr>
-          }
-        </tbody>
-    </table>
+    <app-table-task></app-table-task>
 </div>
 </mat-card>
