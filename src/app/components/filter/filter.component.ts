@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {
+  Component, EventEmitter, Input, Output,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -7,7 +9,25 @@ import { FormControl } from '@angular/forms';
   styleUrl: './filter.component.scss',
 })
 export class FilterComponent {
-  toppings = new FormControl('');
+  filterControl: FormControl<string> = new FormControl();
 
-  toppingList: string[] = ['filter1', 'filter2'];
+  select: string[] = [];
+
+  @Input()
+    filterList: string[] = [];
+
+  @Input()
+    field: string = '';
+
+  @Output()
+    selectedFilter: EventEmitter<string[]> = new EventEmitter<string[]>();
+
+  passSelect() {
+    this.selectedFilter.emit(this.select);
+  }
+
+  clearSelect() {
+    this.select = [];
+    this.selectedFilter.emit(this.select);
+  }
 }

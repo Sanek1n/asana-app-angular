@@ -1,33 +1,43 @@
 <table class="table table-striped table-sm">
   <thead>
-      <tr>
-          @for (column of tableColumn; track column) {
-              <th>
-                  {{column.title}}
-                  <!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                    <mat-icon>filter_list</mat-icon>
-                  </button> -->
-                  <app-filter></app-filter>
-                  <button mat-icon-button (click)="sortBy(column.name)" class="sort__btn">
-                      @if (sortProperty === column.name) {
-                          @switch (sortOrder) {
-                              @case (-1) {
-                                  <mat-icon>sort</mat-icon>
-                              }
-                              @case (1) {
-                                  <mat-icon style="transform: scale(1, -1)">sort</mat-icon>
-                              }
-                              @case (0) {
-                                  <mat-icon>sort_by_alpha</mat-icon>
-                              }
-                          }
-                      } @else {
-                          <mat-icon>sort_by_alpha</mat-icon>
-                      }
-                  </button>
-              </th>
-          }
-      </tr>
+    <tr>
+      @for (column of tableColumn; track column) {
+        <th>
+            {{column.title}}
+            <!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>filter_list</mat-icon>
+            </button> -->
+            @if (column.name === 'ended'
+              || column.name === 'deadline'
+              || column.name === 'priority'
+              || column.name === 'status'
+              ) {
+                <app-filter
+                  [filterList]="getFilterValue(column.name)"
+                  [field]="column.name"
+                  (selectedFilter)="filterBy($event, column.name)"
+                ></app-filter>
+            }
+            <button mat-icon-button (click)="sortBy(column.name)" class="sort__btn">
+                @if (sortProperty === column.name) {
+                    @switch (sortOrder) {
+                        @case (-1) {
+                          <mat-icon>sort</mat-icon>
+                        }
+                        @case (1) {
+                          <mat-icon style="transform: scale(1, -1)">sort</mat-icon>
+                        }
+                        @case (0) {
+                          <mat-icon> import_export</mat-icon>
+                        }
+                    }
+                } @else {
+                  <mat-icon> import_export</mat-icon>
+                }
+            </button>
+        </th>
+      }
+    </tr>
   </thead>
   <tbody>
     @for (task of tasks; track task.id) {

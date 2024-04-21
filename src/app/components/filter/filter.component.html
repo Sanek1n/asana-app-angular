@@ -3,14 +3,20 @@
 </button>
 <mat-menu #menu="matMenu" class="menu">
   <div class="menu__header">
-    <button mat-button>Применить</button>
-    <button mat-button>Очистить</button>
+    <button mat-button (click)="passSelect()">Применить</button>
+    <button mat-button (click)="clearSelect()">Очистить</button>
   </div>
   <mat-form-field class="menu__filter" (click)="$event.stopPropagation()">
     <mat-label>Фильтр</mat-label>
-    <mat-select [formControl]="toppings" multiple class="menu__select">
-      @for (topping of toppingList; track topping) {
-        <mat-option [value]="topping" class="menu__option">{{topping}}</mat-option>
+    <mat-select [formControl]="filterControl" multiple class="menu__select" [(value)]="select">
+      @for (item of filterList; track item) {
+        <mat-option [value]="item" class="menu__option">
+          @if (field === 'beginDate' || field === 'deadline') {
+            {{item | date: "dd.MM.YYYY":"":"ru"}}
+          } @else {
+            {{item}}
+          }
+        </mat-option>
       }
     </mat-select>
   </mat-form-field>
