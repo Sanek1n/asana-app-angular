@@ -66,9 +66,8 @@ export class TableTaskComponent implements OnInit {
     return newOrder;
   }
 
-  // Добавить обработку index при отсутствии задач
-
   sortFunction(el1: Task, el2: Task): number {
+    if (this.tasks.length === 0) return 0;
     type Keys = keyof typeof el1;
     const index = Object.keys(el1).findIndex((val) => val === this.sortProperty);
     const taskKey: Keys = Object.keys(el1)[index] as Keys;
@@ -94,9 +93,8 @@ export class TableTaskComponent implements OnInit {
     return result * this.sortOrder;
   }
 
-  // Добавить обработку index при отсутствии задач
-
   getFilterValue(column: string): string[] {
+    if (this.tasks.length === 0) return new Array(0);
     type Keys = keyof typeof this.tasks[0];
     const index = Object.keys(this.tasks[0]).findIndex((val) => val === column);
     const taskKey: Keys = Object.keys(this.tasks[0])[index] as Keys;
@@ -111,19 +109,23 @@ export class TableTaskComponent implements OnInit {
     return [...list.values()];
   }
 
-  // Добавить обработку index при отсутствии задач
   // Добавить сохранение фильтра для использование в сортировке
-  // Исправить обработку фильра для поля Выполнено
 
   filterBy(select: string[], field: string): void {
+    if (this.tasks.length === 0) return;
     type Keys = keyof typeof this.tasks[0];
     const index = Object.keys(this.tasks[0]).findIndex((val) => val === field);
     const taskKey: Keys = Object.keys(this.tasks[0])[index] as Keys;
     this.dataSource.getTasks()
       .pipe(map((data: Task[]) => data.filter((val: Task) => {
         if (select.length > 0) {
-          console.log(select);
-          return select.includes(val[taskKey].toString());
+          let result: boolean;
+          if (field === 'ended') {
+            result = select.includes(val[taskKey] ? 'Выполнено' : 'Не выполнено');
+          } else {
+            result = select.includes(val[taskKey].toString());
+          }
+          return result;
         }
         return true;
       })))
