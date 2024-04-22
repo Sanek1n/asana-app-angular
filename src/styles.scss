@@ -1,4 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+@import './styles/colors.scss';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mini-task__priority_low {
+  background-color: $priority-low-color;
+}
+
+.mini-task__priority_medium {
+  background-color: $priority-medium-color;
+}
+
+.mini-task__priority_high {
+  background-color: $priority-high-color;
+}
+
+.plan {
+  background-color: $status-plan-color;
+}
+
+.threat {
+  background-color: $status-threat-color;
+}
+
+.behind {
+  background-color: $status-behind-color;
+}

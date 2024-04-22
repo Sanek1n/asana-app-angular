@@ -36,8 +36,8 @@ export class TableTaskComponent implements OnInit {
   }
 
   sortBy(property: string) {
-    this.sortOrder = this.getOrder(property, this.sortOrder);
     this.sortProperty = property;
+    this.sortOrder = this.getOrder(property, this.sortOrder);
     this.dataSource.getTasks()
       .pipe(map((data: Task[]) => data.sort(this.sortFunction.bind(this))))
       .subscribe((data: Task[]) => {
@@ -57,6 +57,7 @@ export class TableTaskComponent implements OnInit {
           break;
         case -1:
           newOrder = 0;
+          this.sortProperty = 'id';
           break;
         default:
       }
@@ -71,26 +72,26 @@ export class TableTaskComponent implements OnInit {
     type Keys = keyof typeof el1;
     const index = Object.keys(el1).findIndex((val) => val === this.sortProperty);
     const taskKey: Keys = Object.keys(el1)[index] as Keys;
-    let result = 0;
+    let res: number = 0;
     const priorityArray: Array<Priority> = Object.values(Priority);
     const statusArray: Array<Status> = Object.values(Status);
     switch (taskKey) {
       case 'priority':
-        result = priorityArray.findIndex((val: Priority) => val === el1.priority)
+        res = priorityArray.findIndex((val: Priority) => val === el1.priority)
           - priorityArray.findIndex((val: Priority) => val === el2.priority);
         break;
       case 'status':
-        result = statusArray.findIndex((val: Status) => val === el1.status)
+        res = statusArray.findIndex((val: Status) => val === el1.status)
           - statusArray.findIndex((val: Status) => val === el2.status);
         break;
       default:
-        if (el1[taskKey] < el2[taskKey]) {
-          result = -1;
+        if (el1[taskKey].toLocaleString() <= el2[taskKey].toLocaleString()) {
+          res = -1;
         } else {
-          result = 1;
+          res = 1;
         }
     }
-    return result * this.sortOrder;
+    return res * this.sortOrder;
   }
 
   getFilterValue(column: string): string[] {

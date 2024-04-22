@@ -7,7 +7,7 @@
   </div>
   <mat-checkbox class="mini-task__complete"
     color="primary"
-    matTooltip="Завершить задачу"
+    [matTooltip]="(!taskData?.ended) ? 'Завершить задачу' : 'Восстановить задачу'"
     [checked]="taskData!.ended"
     (change)="handlerComplete()"
   >

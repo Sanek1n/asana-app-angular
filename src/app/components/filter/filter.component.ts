@@ -11,7 +11,7 @@ import { FormControl } from '@angular/forms';
 export class FilterComponent {
   filterControl: FormControl<string> = new FormControl();
 
-  select: string[] = [];
+  public select: string[] = [];
 
   @Input()
     filterList: string[] = [];

@@ -3,3 +3,48 @@
   height: 30px;
   padding: 5px 0;
 }
+
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  &__row {
+    height: 50px;
+    transition: .3s;
+    cursor: pointer;
+  }
+
+  &__row:hover {
+    background-color: ghostwhite;
+  }
+
+  &__header {
+    vertical-align: middle !important;
+    padding: 10px;
+  }
+
+  &__title-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__title {
+    display: block;
+    width: fit-content;
+  }
+
+  &__data {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &__priority,
+  &__status {
+    display: inline-block;
+    width: 50%;
+    padding: 10px 20px;
+    border-radius: 25px;
+  }
+}
