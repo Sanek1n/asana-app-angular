@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-import { Priority, Status, Task } from 'app/models/app-models';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  EditTask, Priority, Status, Task,
+} from 'app/models/app-models';
 import { RepositoryService } from 'app/services/repository.service';
 
 @Component({
@@ -9,12 +11,31 @@ import { RepositoryService } from 'app/services/repository.service';
   templateUrl: './create-task.component.html',
   styleUrl: './create-task.component.scss',
 })
-export class CreateTaskComponent {
+export class CreateTaskComponent implements OnInit {
   constructor(
+    @Inject(MAT_DIALOG_DATA)
+    public data: EditTask,
     private fb: FormBuilder,
     private dataSource: RepositoryService,
     private dialogRef: MatDialogRef<CreateTaskComponent>,
   ) {}
+
+  ngOnInit(): void {
+    if (this.data.isEdit) {
+      this.dataSource.getTask(this.data.id)
+        .subscribe((data: Task | null) => {
+          if (data) {
+            this.newTask = data;
+            this.createForm.controls.titleForm.setValue(this.newTask.title);
+            this.createForm.controls.beginForm.setValue(new Date(this.newTask.beginDate));
+            this.createForm.controls.endForm.setValue(new Date(this.newTask.deadline));
+            this.createForm.controls.priorityForm.setValue(this.newTask.priority);
+            this.createForm.controls.statusForm.setValue(this.newTask.status);
+            this.createForm.controls.descForm.setValue(this.newTask.description);
+          }
+        });
+    }
+  }
 
   private newTask: Task = {
     id: 0,
@@ -43,7 +64,7 @@ export class CreateTaskComponent {
 
   submitForm() {
     if (this.createForm.valid) {
-      this.dataSource.createTask({
+      const saveTask: Task = {
         ...this.newTask,
         title: this.createForm.value.titleForm as string,
         beginDate: new Date((this.createForm.value.beginForm as Date).setHours(0, 0, 0)),
@@ -51,12 +72,22 @@ export class CreateTaskComponent {
         priority: this.createForm.value.priorityForm as Priority,
         status: this.createForm.value.statusForm as Status,
         description: this.createForm.value.descForm as string,
-      })
-        .subscribe({
-          complete: () => {
-            this.dialogRef.close();
-          },
-        });
+      };
+      if (this.data.isEdit) {
+        this.dataSource.saveTask(saveTask)
+          .subscribe({
+            complete: () => {
+              this.dialogRef.close();
+            },
+          });
+      } else {
+        this.dataSource.createTask(saveTask)
+          .subscribe({
+            complete: () => {
+              this.dialogRef.close();
+            },
+          });
+      }
     }
   }
 }

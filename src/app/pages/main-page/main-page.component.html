@@ -13,6 +13,7 @@
                 [taskData]="item"
                 (endTask)="completeTask($event)"
                 (deleteTask)="deleteTask($event)"
+                (editTask)="editTask($event)"
                 [routerLink]="['/task', item.id]"
               ></app-mini-task>
             }
@@ -30,6 +31,7 @@
                 [taskData]="item"
                 (endTask)="completeTask($event)"
                 (deleteTask)="deleteTask($event)"
+                (editTask)="editTask($event)"
                 [routerLink]="['/task', item.id]"
               ></app-mini-task>
             }
@@ -47,6 +49,7 @@
                 [taskData]="item"
                 (endTask)="completeTask($event)"
                 (deleteTask)="deleteTask($event)"
+                (editTask)="editTask($event)"
                 [routerLink]="['/task', item.id]"
               ></app-mini-task>
             }

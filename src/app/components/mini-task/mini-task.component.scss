@@ -6,6 +6,7 @@
   justify-content: space-between;
   align-items: center;
   transition: .3s;
+  overflow: hidden;
   cursor: pointer;
 
   &__complete {
@@ -23,7 +24,7 @@
   &__deadline {
     min-width: fit-content;
     padding: 0 20px;
-    padding-right: 60px;
+    padding-right: 120px;
     flex-shrink: 1;
   }
 
@@ -40,18 +41,17 @@
     transform: rotate(45deg) translateX(-30px) translateY(60px);
   }
 
-  &__delete {
+  &__edit {
     position: absolute;
-    right: 5px;
+    right: -100px;
     transition: .3s;
-    opacity: 0;
   }
 }
 
 .mini-task:hover {
   background-color: ghostwhite;
 
-  .mini-task__delete {
-    opacity: 1;
+  .mini-task__edit {
+    transform: translateX(-110px);
   }
 }

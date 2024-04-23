@@ -15,6 +15,11 @@ interface Task {
   ended: boolean,
 }
 
+interface EditTask {
+  isEdit: boolean,
+  id: number,
+}
+
 interface Columns {
   name: string,
   title: string
@@ -73,4 +78,5 @@ export {
   Status,
   Store,
   Columns,
+  EditTask,
 };

@@ -18,6 +18,9 @@ export class MiniTaskComponent implements OnInit {
   @Output()
     deleteTask = new EventEmitter<number>();
 
+  @Output()
+    editTask = new EventEmitter<number>();
+
   public priorityTooltip: string = '';
 
   ngOnInit(): void {
@@ -31,9 +34,17 @@ export class MiniTaskComponent implements OnInit {
     }
   }
 
-  handlerDelete(): void {
+  handlerDelete(event: Event): void {
     if (this.taskData) {
       this.deleteTask.emit(this.taskData.id);
     }
+    event.stopPropagation();
+  }
+
+  handlerEdit(event: Event): void {
+    if (this.taskData) {
+      this.editTask.emit(this.taskData.id);
+    }
+    event.stopPropagation();
   }
 }

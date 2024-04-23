@@ -96,7 +96,30 @@ export class MainPageComponent implements OnInit {
   }
 
   addTask(): void {
-    const dialogRef = this.dialog.open(CreateTaskComponent);
+    const dialogRef = this.dialog.open(
+      CreateTaskComponent,
+      {
+        data: {
+          isEdit: false,
+          id: null,
+        },
+      },
+    );
+    dialogRef.afterClosed().subscribe(() => {
+      this.dataSource.getTasks();
+    });
+  }
+
+  editTask(idTask: number): void {
+    const dialogRef = this.dialog.open(
+      CreateTaskComponent,
+      {
+        data: {
+          isEdit: true,
+          id: idTask,
+        },
+      },
+    );
     dialogRef.afterClosed().subscribe(() => {
       this.dataSource.getTasks();
     });

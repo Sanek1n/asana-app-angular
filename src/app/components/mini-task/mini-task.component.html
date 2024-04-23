@@ -14,13 +14,22 @@
   </mat-checkbox>
   <p class="mini-task__name">{{taskData!.title}}</p>
   <p class="mini-task__deadline">{{taskData!.beginDate | date: "d MMMM":"":"ru"}} - {{taskData!.deadline | date: "d MMMM":"":"ru"}}</p>
-  <div class="mini-task__delete">
+  <div class="mini-task__edit">
+    <button
+      mat-mini-fab
+      matTooltip="Редактировать задачу"
+      color="primary"
+      aria-label="Edit"
+      (click)="handlerEdit($event)"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
     <button
       mat-mini-fab
       matTooltip="Удалить задачу"
       color="primary"
       aria-label="Delete"
-      (click)="handlerDelete()"
+      (click)="handlerDelete($event)"
     >
       <mat-icon>delete_outline</mat-icon>
     </button>
