@@ -4,7 +4,8 @@
     <mat-form-field class="example-full-width create-task__title">
       <mat-label>Название задачи</mat-label>
       <input matInput
-      formControlName="titleForm"
+        cdkFocusInitial
+        formControlName="titleForm"
         placeholder="Напишите название задачи"
       >
       @if (!createForm.controls.titleForm.hasError("requred")) {
@@ -32,12 +33,27 @@
         }
       </mat-select>
     </mat-form-field>
+    <mat-form-field class="create-task__status">
+      <mat-label>Статус</mat-label>
+      <mat-select formControlName="statusForm">
+        @for (status of statusList; track status) {
+          <mat-option class="create-task__status-color" [value]="status[1]" [appStatus]="status[1]">{{status[1]}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="create-task__description">
+      <mat-label>Описание</mat-label>
+      <textarea
+        matInput
+        formControlName="descForm"
+        rows="3"
+      ></textarea>
+    </mat-form-field>
     <mat-dialog-actions align="end">
       <button mat-flat-button mat-dialog-close>Отмена</button>
       <button
         mat-flat-button
         color="primary"
-        cdkFocusInitial
         type="button"
         [disabled]="!createForm.valid"
         (click)="submitForm()"

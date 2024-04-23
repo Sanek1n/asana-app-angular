@@ -30,11 +30,15 @@ export class CreateTaskComponent {
 
   public priorityList: Array<[string, Priority]> = Object.entries(Priority);
 
+  public statusList: Array<[string, Status]> = Object.entries(Status);
+
   public createForm = this.fb.group({
     titleForm: [this.newTask.title, { validators: [Validators.required] }],
     beginForm: [this.newTask.beginDate, { validators: [Validators.required] }],
     endForm: [this.newTask.deadline, { validators: [Validators.required] }],
     priorityForm: [this.newTask.priority],
+    statusForm: [this.newTask.status],
+    descForm: [this.newTask.description],
   });
 
   submitForm() {
@@ -45,6 +49,8 @@ export class CreateTaskComponent {
         beginDate: new Date((this.createForm.value.beginForm as Date).setHours(0, 0, 0)),
         deadline: new Date((this.createForm.value.endForm as Date).setHours(23, 59, 59)),
         priority: this.createForm.value.priorityForm as Priority,
+        status: this.createForm.value.statusForm as Status,
+        description: this.createForm.value.descForm as string,
       })
         .subscribe({
           complete: () => {
