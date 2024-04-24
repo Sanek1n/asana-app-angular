@@ -28,7 +28,7 @@ export class CreateTaskComponent implements OnInit {
       this.dataSource.getTask(this.data.id)
         .subscribe((data: Task | null) => {
           if (data) {
-            this.newTask = data;
+            Object.assign(this.newTask, data);
             this.createForm.controls.endedForm.setValue(this.newTask.ended);
             this.createForm.controls.titleForm.setValue(this.newTask.title);
             this.createForm.controls.beginForm.setValue(new Date(this.newTask.beginDate));
@@ -80,13 +80,15 @@ export class CreateTaskComponent implements OnInit {
     if (this.createForm.valid) {
       const saveTask: Task = {
         ...this.newTask,
-        ended: this.createForm.value.endedForm as boolean,
-        title: this.createForm.value.titleForm as string,
-        beginDate: new Date((this.createForm.value.beginForm as Date).setHours(0, 0, 0)),
-        deadline: new Date((this.createForm.value.endForm as Date).setHours(23, 59, 59)),
-        priority: this.createForm.value.priorityForm as Priority,
-        status: this.createForm.value.statusForm as Status,
-        description: this.createForm.value.descForm as string,
+        ended: this.createForm.controls.endedForm.value as boolean,
+        title: this.createForm.controls.titleForm.value as string,
+        beginDate:
+          new Date(((this.createForm.controls.beginForm.value as Date).setHours(0, 0, 0, 0))),
+        deadline:
+          new Date(((this.createForm.controls.endForm.value as Date).setHours(23, 59, 59, 0))),
+        priority: this.createForm.controls.priorityForm.value as Priority,
+        status: this.createForm.controls.statusForm.value as Status,
+        description: this.createForm.controls.descForm.value as string,
       };
       if (this.data.isEdit) {
         this.dataSource.saveTask(saveTask)
