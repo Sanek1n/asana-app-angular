@@ -1,4 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {
+  Component, Inject, OnInit, ViewEncapsulation,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {
@@ -10,6 +12,7 @@ import { RepositoryService } from 'app/services/repository.service';
   selector: 'app-create-task',
   templateUrl: './create-task.component.html',
   styleUrl: './create-task.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class CreateTaskComponent implements OnInit {
   constructor(
@@ -33,6 +36,11 @@ export class CreateTaskComponent implements OnInit {
             this.createForm.controls.priorityForm.setValue(this.newTask.priority);
             this.createForm.controls.statusForm.setValue(this.newTask.status);
             this.createForm.controls.descForm.setValue(this.newTask.description);
+
+            this.createForm.controls.titleForm.disable();
+            this.createForm.controls.beginForm.disable();
+            this.createForm.controls.endForm.disable();
+            this.createForm.controls.priorityForm.disable();
           }
         });
     }
