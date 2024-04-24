@@ -6,7 +6,6 @@
       class="complete-btn"
       mat-raised-button
       (click)="completeTask()"
-      formControlName="endedForm"
       [ngClass]="createForm.value.endedForm ? 'complete' : ''"
     ><mat-icon>done</mat-icon> Выполнено</button>
     }

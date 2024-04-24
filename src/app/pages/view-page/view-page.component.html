@@ -4,35 +4,29 @@
       class="complete-btn"
       mat-raised-button
       (click)="completeTask()"
-      [ngClass]="editTask.ended ? 'complete' : ''"
+      [ngClass]="viewTask.ended ? 'complete' : ''"
     ><mat-icon>done</mat-icon> Выполнено</button>
-    <form class="edit-task" [formGroup]="editForm">
+    <form class="edit-task">
       <mat-form-field class="example-full-width edit-task__title">
         <mat-label>Название задачи</mat-label>
-        <input matInput
-        formControlName="titleForm"
+        <input matInput disabled
+        [value]="viewTask.title"
           placeholder="Напишите название задачи"
         >
-        @if (!editForm.controls.titleForm.hasError("requred")) {
-          <mat-error><strong>Необходимо</strong> ввести название задачи</mat-error>
-        }
       </mat-form-field>
       <mat-form-field class="edit-task__date">
         <mat-label>Срок выполнения</mat-label>
         <mat-date-range-input [rangePicker]="picker">
-          <input matStartDate placeholder="Начальная дата" formControlName="beginForm">
-          <input matEndDate placeholder="Конечная дата" formControlName="endForm">
+          <input disabled matStartDate placeholder="Начальная дата" [value]="viewTask.beginDate">
+          <input disabled matEndDate placeholder="Конечная дата" [value]="viewTask.deadline">
         </mat-date-range-input>
         <mat-hint>ДД/ММ/ГГГГ – ДД/ММ/ГГГГ</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
-        @if (!editForm.controls.beginForm.hasError("requred") || !editForm.controls.endForm.hasError("requred")) {
-          <mat-error><strong>Необходимо</strong> заполнить срок выполнения задачи</mat-error>
-        }
       </mat-form-field>
       <mat-form-field class="edit-task__priority">
         <mat-label>Приоритет</mat-label>
-        <mat-select formControlName="priorityForm">
+        <mat-select disabled [value]="viewTask.priority">
           @for (priority of priorityList; track priority) {
             <mat-option class="edit-task__priority-color" [value]="priority[1]" [appPriority]="priority[1]">{{priority[1]}}</mat-option>
           }
@@ -40,7 +34,7 @@
       </mat-form-field>
       <mat-form-field class="edit-task__status">
         <mat-label>Статус</mat-label>
-        <mat-select formControlName="statusForm">
+        <mat-select disabled [value]="viewTask.status">
           @for (status of statusList; track status) {
             <mat-option class="edit-task__status-color" [value]="status[1]" [appStatus]="status[1]">{{status[1]}}</mat-option>
           }
@@ -50,24 +44,19 @@
         <mat-label>Описание</mat-label>
         <textarea
           matInput
-          formControlName="descForm"
+          disabled
           rows="3"
+          [value]="viewTask.description"
         ></textarea>
       </mat-form-field>
     </form>
     <mat-dialog-actions class="edit-task__controls">
       <button
-      class="edit-task__cancel"
-        mat-flat-button
-        type="button"
-        (click)="cancelEdit()"
-      >Отмена</button>
-      <button
         mat-flat-button
         color="primary"
         type="button"
-        (click)="submitForm()"
-      >Сохранить</button>
+        (click)="cancelEdit()"
+      >Назад</button>
     </mat-dialog-actions>
   </mat-dialog-content>
 </mat-card>
