@@ -17,7 +17,7 @@ import { MiniTaskComponent } from './components/mini-task/mini-task.component';
 import { CreateTaskComponent } from './components/create-task/create-task.component';
 import { PriorityDirective } from './directives/priority.directive';
 import { PriorityTaskDirective } from './directives/priority-task.directive';
-import { EditPageComponent } from './pages/edit-page/edit-page.component';
+import { ViewPageComponent } from './pages/view-page/view-page.component';
 import { ListPageComponent } from './pages/list-page/list-page.component';
 import { StatusDirective } from './directives/status.directive';
 import { TableTaskComponent } from './components/table-task/table-task.component';
@@ -35,7 +35,7 @@ registerLocaleData(LocaleRu, 'ru');
     PriorityDirective,
     PriorityTaskDirective,
     StatusDirective,
-    EditPageComponent,
+    ViewPageComponent,
     ListPageComponent,
     TableTaskComponent,
     FilterComponent,
