@@ -13,6 +13,8 @@ export class FilterComponent {
 
   public select: string[] = [];
 
+  public isSelect: boolean = false;
+
   @Input()
     filterList: string[] = [];
 
@@ -24,10 +26,16 @@ export class FilterComponent {
 
   passSelect() {
     this.selectedFilter.emit(this.select);
+    if (this.select.length > 0) {
+      this.isSelect = true;
+    } else {
+      this.isSelect = false;
+    }
   }
 
   clearSelect() {
     this.select = [];
     this.selectedFilter.emit(this.select);
+    this.isSelect = false;
   }
 }
