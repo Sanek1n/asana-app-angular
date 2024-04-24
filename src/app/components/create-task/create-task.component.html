@@ -1,6 +1,15 @@
 <h2 mat-dialog-title>Добавить задачу</h2>
 <mat-dialog-content class="mat-typography">
   <form class="create-task" [formGroup]="createForm">
+    @if (data.isEdit) {
+      <button
+      class="complete-btn"
+      mat-raised-button
+      (click)="completeTask()"
+      formControlName="endedForm"
+      [ngClass]="createForm.value.endedForm ? 'complete' : ''"
+    ><mat-icon>done</mat-icon> Выполнено</button>
+    }
     <mat-form-field class="example-full-width create-task__title">
       <mat-label>Название задачи</mat-label>
       <input matInput

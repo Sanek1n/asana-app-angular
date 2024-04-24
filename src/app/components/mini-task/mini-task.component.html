@@ -16,6 +16,7 @@
   <p class="mini-task__deadline">{{taskData!.beginDate | date: "d MMMM":"":"ru"}} - {{taskData!.deadline | date: "d MMMM":"":"ru"}}</p>
   <div class="mini-task__edit">
     <button
+      class="mini-task__btn"
       mat-mini-fab
       matTooltip="Редактировать задачу"
       color="primary"
@@ -25,6 +26,7 @@
       <mat-icon>edit</mat-icon>
     </button>
     <button
+      class="mini-task__btn"
       mat-mini-fab
       matTooltip="Удалить задачу"
       color="primary"

@@ -6,6 +6,20 @@
   align-items: center;
 }
 
+.complete-btn {
+  margin-bottom: 20px;
+  transition: .5s;
+}
+
+.complete-btn:hover {
+  background-color: $status-plan-color;
+  filter: brightness(1.2);
+}
+
+.complete {
+  background-color: $status-plan-color;
+}
+
 .create-task {
   width: 500px;
 

@@ -26,6 +26,7 @@ export class CreateTaskComponent implements OnInit {
         .subscribe((data: Task | null) => {
           if (data) {
             this.newTask = data;
+            this.createForm.controls.endedForm.setValue(this.newTask.ended);
             this.createForm.controls.titleForm.setValue(this.newTask.title);
             this.createForm.controls.beginForm.setValue(new Date(this.newTask.beginDate));
             this.createForm.controls.endForm.setValue(new Date(this.newTask.deadline));
@@ -54,6 +55,7 @@ export class CreateTaskComponent implements OnInit {
   public statusList: Array<[string, Status]> = Object.entries(Status);
 
   public createForm = this.fb.group({
+    endedForm: [this.newTask.ended],
     titleForm: [this.newTask.title, { validators: [Validators.required] }],
     beginForm: [this.newTask.beginDate, { validators: [Validators.required] }],
     endForm: [this.newTask.deadline, { validators: [Validators.required] }],
@@ -62,10 +64,15 @@ export class CreateTaskComponent implements OnInit {
     descForm: [this.newTask.description],
   });
 
+  completeTask(): void {
+    this.createForm.controls.endedForm.setValue(!this.createForm.value.endedForm);
+  }
+
   submitForm() {
     if (this.createForm.valid) {
       const saveTask: Task = {
         ...this.newTask,
+        ended: this.createForm.value.endedForm as boolean,
         title: this.createForm.value.titleForm as string,
         beginDate: new Date((this.createForm.value.beginForm as Date).setHours(0, 0, 0)),
         deadline: new Date((this.createForm.value.endForm as Date).setHours(23, 59, 59)),

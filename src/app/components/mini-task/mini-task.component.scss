@@ -5,8 +5,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: .3s;
   overflow: hidden;
+  transition: .3s;
   cursor: pointer;
 
   &__complete {
@@ -41,9 +41,15 @@
     transform: rotate(45deg) translateX(-30px) translateY(60px);
   }
 
+  &__btn {
+    display: inline-block;
+    margin: 0 5px;
+  }
+
   &__edit {
     position: absolute;
-    right: -100px;
+    top: -60px;
+    right: 0;
     transition: .3s;
   }
 }
@@ -52,6 +58,6 @@
   background-color: ghostwhite;
 
   .mini-task__edit {
-    transform: translateX(-110px);
+    transform: translateY(65px);
   }
 }
