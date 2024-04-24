@@ -1,23 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   Columns, Priority, Status, Task,
 } from 'app/models/app-models';
 import { RepositoryService } from 'app/services/repository.service';
-import { map } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 
 @Component({
   selector: 'app-table-task',
   templateUrl: './table-task.component.html',
   styleUrl: './table-task.component.scss',
 })
-export class TableTaskComponent implements OnInit {
+export class TableTaskComponent implements OnInit, OnDestroy {
   constructor(private dataSource: RepositoryService) {}
+
+  ngOnDestroy(): void {
+    this.ds.unsubscribe();
+  }
 
   public tasks: Task[] = [];
 
   public sortProperty: string = 'id';
 
   public sortOrder: number = 0;
+
+  private ds: Subscription = new Subscription();
 
   public tableColumn: Columns[] = [
     { name: 'ended', title: 'Выполнено' },
@@ -29,7 +35,8 @@ export class TableTaskComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.dataSource.getTasks()
+    this.ds = this.dataSource.getTasks()
+      .pipe(map((data: Task[]) => data.sort(this.sortFunction.bind(this))))
       .subscribe((data: Task[]) => {
         this.tasks = data;
       });
@@ -39,10 +46,7 @@ export class TableTaskComponent implements OnInit {
     this.sortProperty = property;
     this.sortOrder = this.getOrder(property, this.sortOrder);
     this.dataSource.getTasks()
-      .pipe(map((data: Task[]) => data.sort(this.sortFunction.bind(this))))
-      .subscribe((data: Task[]) => {
-        this.tasks = data;
-      });
+      .pipe(map((data: Task[]) => data.sort(this.sortFunction.bind(this))));
   }
 
   getOrder(property: string, oldOrder: number): number {
@@ -117,7 +121,7 @@ export class TableTaskComponent implements OnInit {
     type Keys = keyof typeof this.tasks[0];
     const index = Object.keys(this.tasks[0]).findIndex((val) => val === field);
     const taskKey: Keys = Object.keys(this.tasks[0])[index] as Keys;
-    this.dataSource.getTasks()
+    this.ds = this.dataSource.getTasks()
       .pipe(map((data: Task[]) => data.filter((val: Task) => {
         if (select.length > 0) {
           let result: boolean;
