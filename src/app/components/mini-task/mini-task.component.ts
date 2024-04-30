@@ -23,8 +23,11 @@ export class MiniTaskComponent implements OnInit {
 
   public priorityTooltip: string = '';
 
+  public statusTooltip: string = '';
+
   ngOnInit(): void {
     this.priorityTooltip = (this.taskData?.priority !== '' ? `Приоритет ${this.taskData?.priority}` : 'Приоритет не задан');
+    this.statusTooltip = (this.taskData?.status !== '' ? `Статус ${this.taskData?.status}` : 'Статус не задан');
   }
 
   handlerComplete(): void {

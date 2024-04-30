@@ -22,6 +22,7 @@ import { ListPageComponent } from './pages/list-page/list-page.component';
 import { StatusDirective } from './directives/status.directive';
 import { TableTaskComponent } from './components/table-task/table-task.component';
 import { FilterComponent } from './components/filter/filter.component';
+import { StatusTaskDirective } from './directives/status-task.directive.';
 
 registerLocaleData(LocaleRu, 'ru');
 
@@ -34,6 +35,7 @@ registerLocaleData(LocaleRu, 'ru');
     CreateTaskComponent,
     PriorityDirective,
     PriorityTaskDirective,
+    StatusTaskDirective,
     StatusDirective,
     ViewPageComponent,
     ListPageComponent,

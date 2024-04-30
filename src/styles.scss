@@ -27,3 +27,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .table__status.behind {
   background-color: $status-behind-color;
 }
+
+.mini-task__status_plan {
+  background-color: $status-plan-color;
+}
+
+.mini-task__status_threat {
+  background-color: $status-threat-color;
+}
+
+.mini-task__status_behind {
+  background-color: $status-behind-color;
+}

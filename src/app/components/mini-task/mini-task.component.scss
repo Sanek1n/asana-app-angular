@@ -32,17 +32,19 @@
     flex-shrink: 1;
   }
 
-  &__prioriy {
+  &__prioriy,
+  &__status {
     flex-shrink: 1;
     width: 60px;
     height: 50px;
     overflow: hidden;
   }
 
-  &__prioriy-color {
+  &__prioriy-color,
+  &__status-color {
     width: 120px;
     height: 120px;
-    transform: rotate(45deg) translateX(-30px) translateY(60px);
+    transform: rotate(45deg) translateX(-30px) translateY(62px);
   }
 
   &__btn {

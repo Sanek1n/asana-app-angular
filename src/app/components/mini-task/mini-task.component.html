@@ -5,6 +5,12 @@
       [appPriorityTask]="taskData!.priority"
     ></div>
   </div>
+  <div class="mini-task__status" [matTooltip]="statusTooltip">
+    <div
+      class="mini-task__status-color"
+      [appStatusTask]="taskData!.status"
+    ></div>
+  </div>
   <mat-checkbox class="mini-task__complete"
     color="primary"
     [matTooltip]="(!taskData?.ended) ? 'Завершить задачу' : 'Восстановить задачу'"
