@@ -43,6 +43,7 @@
     display: block;
     width: 55%;
     margin-top: 10px;
+
   }
 
   &__description {
@@ -67,30 +68,42 @@
     margin-left: 20px;
   }
 
-  &__priority-color.low::after {
-    background-color: $priority-low-color;
+  &__priority.low {
+    .mat-mdc-text-field-wrapper {
+      border-bottom: 3px solid $priority-low-color;
+    }
   }
 
-  &__priority-color.medium::after {
-    background-color: $priority-medium-color;
+  &__priority.medium {
+    .mat-mdc-text-field-wrapper {
+      border-bottom: 3px solid $priority-medium-color;
+    }
   }
 
-  &__priority-color.high::after {
-    background-color: $priority-high-color;
+  &__priority.high {
+    .mat-mdc-text-field-wrapper {
+      border-bottom: 3px solid $priority-high-color;
+    }
   }
 
-  &__status-color.plan::after {
-    background-color: $status-plan-color;
+  &__status.plan {
+    .mat-mdc-text-field-wrapper {
+      border-bottom: 3px solid $status-plan-color;
+    }
   }
 
-  &__status-color.threat::after {
-    background-color: $status-threat-color;
+  &__status.threat {
+    .mat-mdc-text-field-wrapper {
+      border-bottom: 3px solid $status-threat-color;
+    }
   }
 
-  &__status-color.behind::after {
-    background-color: $status-behind-color;
+  &__status.behind {
+    background-color: none;
+    .mat-mdc-text-field-wrapper {
+      border-bottom: 3px solid $status-behind-color;
+    }
   }
-
 }
 
 .mdc-text-field--filled.mdc-text-field--disabled .mdc-text-field__input {
@@ -102,5 +115,9 @@
 }
 
 .mat-mdc-select-disabled {
+  color: black !important;
+}
+
+.mdc-text-field--filled.mdc-text-field--disabled {
   color: black !important;
 }

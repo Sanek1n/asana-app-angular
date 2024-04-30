@@ -16,14 +16,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-color: $priority-high-color;
 }
 
-.plan {
+.table__status.plan {
   background-color: $status-plan-color;
 }
 
-.threat {
+.table__status.threat {
   background-color: $status-threat-color;
 }
 
-.behind {
+.table__status.behind {
   background-color: $status-behind-color;
 }
