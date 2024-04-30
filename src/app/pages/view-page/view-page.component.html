@@ -9,10 +9,12 @@
     <form class="edit-task">
       <mat-form-field class="example-full-width edit-task__title">
         <mat-label>Название задачи</mat-label>
-        <input matInput disabled
+        <textarea
+        matInput
+        disabled
+        rows="3"
         [value]="viewTask.title"
-          placeholder="Напишите название задачи"
-        >
+      ></textarea>
       </mat-form-field>
       <mat-form-field class="edit-task__date">
         <mat-label>Срок выполнения</mat-label>
@@ -56,7 +58,7 @@
         color="primary"
         type="button"
         (click)="cancelEdit()"
-      >Назад</button>
+      >Закрыть</button>
     </mat-dialog-actions>
   </mat-dialog-content>
 </mat-card>

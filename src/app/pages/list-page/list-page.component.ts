@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './list-page.component.scss',
 })
 export class ListPageComponent {
+  constructor(private location: Location) {}
 
+  goBack() {
+    this.location.back();
+  }
 }

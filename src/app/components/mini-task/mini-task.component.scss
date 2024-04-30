@@ -16,6 +16,10 @@
 
   &__name {
     width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     text-align: left;
     flex-shrink: 2;
     padding: 0 20px;

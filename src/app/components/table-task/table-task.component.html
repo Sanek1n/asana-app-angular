@@ -42,13 +42,17 @@
     @for (task of tasks; track task.id) {
     <tr class="table__row" [routerLink]="['/task', task.id]">
         <td class="table__data">{{task.ended ? 'Выполнено': 'Не выполнено'}}</td>
-        <td>{{task.title}}</td>
-        <td class="table__data">{{task.beginDate | date: "dd.MM.YYYY":"":"ru"}}</td>
-        <td class="table__data">{{task.deadline | date: "dd.MM.YYYY":"":"ru"}}</td>
-        <td class="table__data">
+        <td class="table__title-column">
+          <p class="table__task-name">
+            {{task.title}}
+          </p>
+          </td>
+        <td class="table__data table__date-column">{{task.beginDate | date: "dd.MM.YYYY":"":"ru"}}</td>
+        <td class="table__data table__date-column">{{task.deadline | date: "dd.MM.YYYY":"":"ru"}}</td>
+        <td class="table__data table__priority-column">
           <span class="table__priority" [appPriorityTask]="task.priority">{{task.priority}}</span>
         </td>
-        <td class="table__data">
+        <td class="table__data table__status-column">
           <span class="table__status" [appStatus]="task.status">{{task.status}}</span>
         </td>
     </tr>
