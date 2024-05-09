@@ -1,0 +1,70 @@
+.sort__btn {
+  width: 30px;
+  height: 30px;
+  padding: 5px 0;
+}
+
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  &__row {
+    height: 50px;
+    transition: .3s;
+    cursor: pointer;
+  }
+
+  &__row:hover {
+    background-color: ghostwhite;
+  }
+
+  &__header {
+    vertical-align: middle !important;
+    padding: 10px;
+  }
+
+  &__title-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__title {
+    display: block;
+    width: fit-content;
+  }
+
+  &__data {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &__title-column {
+    width: 30%;
+  }
+
+  &__date-column {
+    width: 100px;
+  }
+
+  &__task-name {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__priority-column,
+  &__status-column {
+    width: 200px;
+  }
+
+  &__priority,
+  &__status {
+    display: inline-block;
+    width: 50%;
+    padding: 10px 20px;
+    border-radius: 25px;
+  }
+}

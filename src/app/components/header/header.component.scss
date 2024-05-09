@@ -1,0 +1,11 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  &__logo {
+    font-size: 30px;
+  }
+}
+

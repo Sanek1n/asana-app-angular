@@ -1,0 +1,44 @@
+<li class="mini-task">
+  <div class="mini-task__prioriy" [matTooltip]="priorityTooltip">
+    <div
+      class="mini-task__prioriy-color"
+      [appPriorityTask]="taskData!.priority"
+    ></div>
+  </div>
+  <div class="mini-task__status" [matTooltip]="statusTooltip">
+    <div
+      class="mini-task__status-color"
+      [appStatusTask]="taskData!.status"
+    ></div>
+  </div>
+  <mat-checkbox class="mini-task__complete"
+    color="primary"
+    [matTooltip]="(!taskData?.ended) ? 'Завершить задачу' : 'Восстановить задачу'"
+    [checked]="taskData!.ended"
+    (change)="handlerComplete()"
+  >
+  </mat-checkbox>
+  <p class="mini-task__name">{{taskData!.title}}</p>
+  <p class="mini-task__deadline">{{taskData!.beginDate | date: "d MMMM":"":"ru"}} - {{taskData!.deadline | date: "d MMMM":"":"ru"}}</p>
+  <div class="mini-task__edit">
+    <button
+      class="mini-task__btn"
+      mat-mini-fab
+      color="primary"
+      aria-label="Edit"
+      (click)="handlerEdit($event)"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button
+      class="mini-task__btn"
+      mat-mini-fab
+      color="primary"
+      aria-label="Delete"
+      (click)="handlerDelete($event)"
+    >
+      <mat-icon>delete_outline</mat-icon>
+    </button>
+  </div>
+</li>
+<mat-divider></mat-divider>

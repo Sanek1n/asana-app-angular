@@ -1,0 +1,89 @@
+@import './styles/colors.scss';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.complete-btn {
+  margin-bottom: 20px;
+  transition: .5s;
+}
+
+.complete-btn:hover {
+  background-color: $status-plan-color;
+  filter: brightness(1.2);
+}
+
+.complete {
+  background-color: $status-plan-color !important;
+}
+
+.create-task {
+  width: 500px;
+
+  &__title {
+    width: 100%;
+  }
+
+  &__date {
+    width: 100%;
+  }
+
+  &__priority,
+  &__status {
+    display: block;
+    width: 55%;
+    margin-top: 10px;
+  }
+
+  &__priority-color::after,
+  &__status-color::after {
+    content: '';
+    width: 30px;
+    height: 20px;
+    border-radius: 5px;
+    margin-left: 20px;
+  }
+
+  &__priority-color.low::after {
+    background-color: $priority-low-color;
+  }
+
+  &__priority-color.medium::after {
+    background-color: $priority-medium-color;
+  }
+
+  &__priority-color.high::after {
+    background-color: $priority-high-color;
+  }
+
+  &__status-color.plan::after {
+    background-color: $status-plan-color;
+  }
+
+  &__status-color.threat::after {
+    background-color: $status-threat-color;
+  }
+
+  &__status-color.behind::after {
+    background-color: $status-behind-color;
+  }
+
+  &__description {
+    width: 100%;
+  }
+}
+
+.mdc-text-field--filled.mdc-text-field--disabled .mdc-text-field__input {
+  color: black !important;
+}
+
+.mat-date-range-input-inner[disabled] {
+  color: black !important;
+}
+
+.mat-mdc-select-disabled {
+  color: black !important;
+}
